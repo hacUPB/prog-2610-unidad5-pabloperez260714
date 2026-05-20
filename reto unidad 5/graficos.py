@@ -1,193 +1,80 @@
 import matplotlib.pyplot as plt
-from collections import Counter
 
 
-def grafico_linea(datos):
-    """
-    Gráfico de línea
-    """
+def grafico_palabras(contador):
 
-    columnas = list(
-        datos[0].keys()
-    )
+    palabras = []
+    frecuencias = []
 
-    print(
-        "\nColumnas disponibles:"
-    )
+    top10 = contador.most_common(10)
 
-    print(columnas)
+    for palabra, cantidad in top10:
 
-    columna_x = input(
-        "Seleccione columna X: "
-    )
-
-    columna_y = input(
-        "Seleccione columna Y: "
-    )
-
-    x = []
-    y = []
-
-    for fila in datos:
-
-        try:
-            x.append(
-                fila[columna_x]
-            )
-
-            y.append(
-                float(
-                    fila[columna_y]
-                )
-            )
-
-        except:
-            pass
-
-    plt.figure(figsize=(10, 5))
-
-    plt.plot(x, y)
-
-    plt.title(
-        "Evolución Temporal"
-    )
-
-    plt.xlabel(
-        columna_x
-    )
-
-    plt.ylabel(
-        columna_y
-    )
-
-    plt.xticks(rotation=45)
-
-    plt.savefig(
-        "outputs/tendencia.png"
-    )
-
-    plt.show()
-
-
-def grafico_pastel(datos):
-    """
-    Gráfico de pastel
-    """
-
-    columnas = list(
-        datos[0].keys()
-    )
-
-    print(
-        "\nColumnas disponibles:"
-    )
-
-    print(columnas)
-
-    columna = input(
-        "Seleccione columna categórica: "
-    )
-
-    categorias = []
-
-    for fila in datos:
-        categorias.append(
-            fila[columna]
+        palabras.append(
+            palabra
         )
 
-    conteo = Counter(
-        categorias
-    )
-
-    etiquetas = list(
-        conteo.keys()
-    )
-
-    valores = list(
-        conteo.values()
-    )
-
-    plt.figure(figsize=(8, 8))
-
-    plt.pie(
-        valores,
-        labels=etiquetas,
-        autopct="%1.1f%%"
-    )
-
-    plt.title(
-        "Comparación Categórica"
-    )
-
-    plt.savefig(
-        "outputs/pastel.png"
-    )
-
-    plt.show()
-
-
-def grafico_scatter(datos):
-    """
-    Gráfico scatter
-    """
-
-    columnas = list(
-        datos[0].keys()
-    )
-
-    print(
-        "\nColumnas disponibles:"
-    )
-
-    print(columnas)
-
-    columna_x = input(
-        "Seleccione columna numérica X: "
-    )
-
-    columna_y = input(
-        "Seleccione columna numérica Y: "
-    )
-
-    x = []
-    y = []
-
-    for fila in datos:
-
-        try:
-            x.append(
-                float(
-                    fila[columna_x]
-                )
-            )
-
-            y.append(
-                float(
-                    fila[columna_y]
-                )
-            )
-
-        except:
-            pass
+        frecuencias.append(
+            cantidad
+        )
 
     plt.figure(figsize=(8, 5))
 
-    plt.scatter(x, y)
+    plt.barh(
+        palabras,
+        frecuencias
+    )
 
     plt.title(
-        "Correlación de Variables"
+        "Frecuencia de palabras"
     )
 
     plt.xlabel(
-        columna_x
+        "Frecuencia"
     )
 
     plt.ylabel(
-        columna_y
+        "Palabras"
     )
 
     plt.savefig(
-        "outputs/correlacion.png"
+        "outputs/frecuencia_palabras.png"
+    )
+
+    plt.show()
+
+
+def grafico_histograma(lineas):
+
+    longitudes = []
+
+    for linea in lineas:
+
+        longitudes.append(
+            len(linea)
+        )
+
+    plt.figure(figsize=(8, 5))
+
+    plt.hist(
+        longitudes,
+        bins=10
+    )
+
+    plt.title(
+        "Distribucion de longitud de lineas"
+    )
+
+    plt.xlabel(
+        "Cantidad de caracteres"
+    )
+
+    plt.ylabel(
+        "Numero de lineas"
+    )
+
+    plt.savefig(
+        "outputs/histograma_lineas.png"
     )
 
     plt.show()

@@ -1,5 +1,10 @@
 from collections import Counter
 
+from graficos import (
+    grafico_palabras,
+    grafico_histograma
+)
+
 
 def leer_texto(ruta):
 
@@ -18,7 +23,7 @@ def leer_texto(ruta):
     except FileNotFoundError:
 
         print(
-            "Archivo TXT no encontrado."
+            "Archivo txt no encontrado."
         )
 
         return []
@@ -74,7 +79,7 @@ def resumen_texto(lineas):
     )
 
     print(
-        "\n===== RESUMEN DEL TEXTO ====="
+        "\n===== resumen del texto ====="
     )
 
     print(
@@ -98,7 +103,7 @@ def resumen_texto(lineas):
     )
 
     print(
-        "\nTop 5 palabras más frecuentes:"
+        "\nTop 5 palabras más repetidas:"
     )
 
     top5 = contador.most_common(5)
@@ -144,10 +149,18 @@ def menu_textos(ruta):
     if len(lineas) == 0:
         return
 
-    resumen_texto(
+    contador = resumen_texto(
         lineas
     )
 
     extraer_patrones(
+        lineas
+    )
+
+    grafico_palabras(
+        contador
+    )
+
+    grafico_histograma(
         lineas
     )
