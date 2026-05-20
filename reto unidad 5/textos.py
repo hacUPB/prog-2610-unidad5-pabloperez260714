@@ -1,45 +1,56 @@
 from collections import Counter
-from graficos import (
-    grafico_palabras,
-    histograma_lineas
-)
 
 
 def leer_texto(ruta):
-    """
-    Lee un archivo txt y devuelve sus líneas
-    """
 
     try:
-        with open(ruta, "r", encoding="utf-8") as archivo:
+
+        with open(
+            ruta,
+            "r",
+            encoding="utf-8"
+        ) as archivo:
+
             lineas = archivo.readlines()
 
         return lineas
 
     except FileNotFoundError:
-        print("Error: archivo TXT no encontrado.")
+
+        print(
+            "Archivo TXT no encontrado."
+        )
+
         return []
 
 
-def resumen_estadistico(lineas):
-    """
-    Calcula estadísticas del texto
-    """
+def resumen_texto(lineas):
 
     texto = "".join(lineas)
 
     total_lineas = len(lineas)
-    total_palabras = len(texto.split())
-    caracteres_con_espacios = len(texto)
+
+    total_palabras = len(
+        texto.split()
+    )
+
+    caracteres_con_espacios = len(
+        texto
+    )
+
     caracteres_sin_espacios = len(
-        texto.replace(" ", "")
+        texto.replace(
+            " ",
+            ""
+        )
     )
 
     conectores = [
-        "de", "la", "el", "y",
-        "a", "en", "que", "los",
-        "las", "un", "una",
-        "por", "con"
+        "de", "la", "el",
+        "y", "en", "a",
+        "que", "los",
+        "las", "un",
+        "una"
     ]
 
     palabras = texto.lower().split()
@@ -49,10 +60,11 @@ def resumen_estadistico(lineas):
     for palabra in palabras:
 
         palabra = palabra.strip(
-            ".,;:!?()[]{}\"'"
+            ".,;:!?()[]{}"
         )
 
         if palabra not in conectores:
+
             palabras_filtradas.append(
                 palabra
             )
@@ -61,7 +73,9 @@ def resumen_estadistico(lineas):
         palabras_filtradas
     )
 
-    print("\n===== RESUMEN DEL TEXTO =====")
+    print(
+        "\n===== RESUMEN DEL TEXTO ====="
+    )
 
     print(
         "Cantidad de líneas:",
@@ -84,12 +98,13 @@ def resumen_estadistico(lineas):
     )
 
     print(
-        "\nTop 5 palabras más repetidas:"
+        "\nTop 5 palabras más frecuentes:"
     )
 
     top5 = contador.most_common(5)
 
     for palabra, cantidad in top5:
+
         print(
             palabra,
             "-",
@@ -100,51 +115,39 @@ def resumen_estadistico(lineas):
 
 
 def extraer_patrones(lineas):
-    """
-    Busca ERROR o 404
-    """
 
     errores = 0
 
     for linea in lineas:
 
         if (
-            "ERROR" in linea.upper()
-            or "404" in linea
+            "ERROR"
+            in linea.upper()
+            or "404"
+            in linea
         ):
+
             errores += 1
 
     print(
-        "\nCantidad de errores encontrados:",
+        "\nErrores encontrados:",
         errores
     )
 
 
 def menu_textos(ruta):
-    """
-    Función principal TXT
-    """
 
-    lineas = leer_texto(ruta)
+    lineas = leer_texto(
+        ruta
+    )
 
     if len(lineas) == 0:
         return
 
-    contador = resumen_estadistico(
+    resumen_texto(
         lineas
     )
 
-    extraer_patrones(lineas)
-
-    grafico_palabras(contador)
-
-    longitudes = []
-
-    for linea in lineas:
-        longitudes.append(
-            len(linea)
-        )
-
-    histograma_lineas(
-        longitudes
+    extraer_patrones(
+        lineas
     )
