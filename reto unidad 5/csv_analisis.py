@@ -1,4 +1,5 @@
 import csv
+
 from graficos import (
     grafico_linea,
     grafico_pastel,
@@ -7,13 +8,11 @@ from graficos import (
 
 
 def leer_csv(ruta):
-    """
-    Lee un archivo CSV
-    """
 
     datos = []
 
     try:
+
         with open(
             ruta,
             "r",
@@ -25,32 +24,32 @@ def leer_csv(ruta):
             )
 
             for fila in lector:
-                datos.append(fila)
+                datos.append(
+                    fila
+                )
 
         return datos
 
     except FileNotFoundError:
+
         print(
-            "Error: archivo CSV no encontrado."
+            "Archivo csv no encontrado."
         )
+
         return []
 
 
 def vista_previa(datos):
-    """
-    Muestra primeras 10
-    y últimas 5 filas
-    """
 
     print(
-        "\n===== PRIMERAS 10 FILAS ====="
+        "\n===== primeras 10 filas ====="
     )
 
     for fila in datos[:10]:
         print(fila)
 
     print(
-        "\n===== ÚLTIMAS 5 FILAS ====="
+        "\n===== ultimas 5 filas ====="
     )
 
     for fila in datos[-5:]:
@@ -58,20 +57,20 @@ def vista_previa(datos):
 
 
 def estadisticas(datos, columna):
-    """
-    Calcula estadísticas
-    descriptivas
-    """
 
     numeros = []
 
     for fila in datos:
 
-        valor = fila[columna]
+        valor = fila.get(
+            columna,
+            ""
+        )
 
         if valor != "":
 
             try:
+
                 numeros.append(
                     float(valor)
                 )
@@ -80,9 +79,11 @@ def estadisticas(datos, columna):
                 pass
 
     if len(numeros) == 0:
+
         print(
-            "No hay datos numéricos."
+            "No hay datos numericos."
         )
+
         return
 
     numeros.sort()
@@ -102,16 +103,17 @@ def estadisticas(datos, columna):
         ) / 2
 
     else:
+
         mediana = numeros[
             n // 2
         ]
 
     print(
-        "\n===== ESTADÍSTICAS ====="
+        "\n===== estadisticas ====="
     )
 
     print(
-        "Registros válidos:",
+        "Registros validos:",
         len(numeros)
     )
 
@@ -126,41 +128,41 @@ def estadisticas(datos, columna):
     )
 
     print(
-        "Máximo:",
+        "Maximo:",
         max(numeros)
     )
 
     print(
-        "Mínimo:",
+        "Minimo:",
         min(numeros)
     )
 
 
 def menu_csv(ruta):
-    """
-    Menú principal CSV
-    """
 
-    datos = leer_csv(ruta)
+    datos = leer_csv(
+        ruta
+    )
 
     if len(datos) == 0:
         return
 
-    vista_previa(datos)
+    vista_previa(
+        datos
+    )
 
     print(
         "\nColumnas disponibles:"
     )
 
-    print(
-        list(
-            datos[0].keys()
-        )
+    columnas = list(
+        datos[0].keys()
     )
 
+    print(columnas)
+
     columna = input(
-        "\nIngrese una "
-        "columna numérica: "
+        "\nIngrese columna numerica: "
     )
 
     estadisticas(

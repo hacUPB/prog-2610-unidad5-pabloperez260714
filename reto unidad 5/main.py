@@ -6,6 +6,10 @@ from textos import (
     menu_textos
 )
 
+from csv_analisis import (
+    menu_csv
+)
+
 
 def menu_principal():
 
@@ -20,11 +24,11 @@ def menu_principal():
         )
 
         print(
-            "2. Procesar Bitácoras / Textos (.txt)"
+            "2. Procesar textos (.txt)"
         )
 
         print(
-            "3. Analizar Dataset (.csv)"
+            "3. Analizar csv"
         )
 
         print(
@@ -32,7 +36,7 @@ def menu_principal():
         )
 
         opcion = input(
-            "Seleccione una opción: "
+            "Seleccione una opcion: "
         )
 
         if opcion == "1":
@@ -57,8 +61,14 @@ def menu_principal():
 
         elif opcion == "3":
 
-            print(
-                "Analizar CSV"
+            archivo = input(
+                "Ingrese el nombre del csv: "
+            )
+
+            ruta = f"data/{archivo}"
+
+            menu_csv(
+                ruta
             )
 
         elif opcion == "4":
@@ -72,7 +82,7 @@ def menu_principal():
         else:
 
             print(
-                "Opción inválida"
+                "Opcion invalida"
             )
 
 
