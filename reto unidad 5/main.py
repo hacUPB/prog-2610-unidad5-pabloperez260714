@@ -15,75 +15,26 @@ def menu_principal():
 
     while True:
 
-        print(
-            "\n menu principal"
-        )
-
-        print(
-            "1. Explorar directorio"
-        )
-
-        print(
-            "2. Procesar textos"
-        )
-
-        print(
-            "3. Analizar csv"
-        )
-
-        print(
-            "4. Salir"
-        )
-
-        opcion = input(
-            "Seleccione una opcion: "
-        )
-
+        print("\n menu principal")
+        print("1. Explorar directorio")
+        print("2. Procesar textos")
+        print("3. Analizar csv")
+        print("4. Salir")
+        opcion = input("Seleccione una opcion: ")
         if opcion == "1":
-
             ruta = "data"
-
-            explorar_directorio(
-                ruta
-            )
-
+            explorar_directorio(ruta)
         elif opcion == "2":
-
-            archivo = input(
-                "Ingrese el nombre del txt: "
-            )
-
+            archivo = input("Ingrese el nombre del txt: ")
             ruta = f"data/{archivo}"
-
-            menu_textos(
-                ruta
-            )
-
+            menu_textos(ruta)
         elif opcion == "3":
-
-            archivo = input(
-                "Ingrese el nombre del csv: "
-            )
-
+            archivo = input("Ingrese el nombre del csv: ")
             ruta = f"data/{archivo}"
-
-            menu_csv(
-                ruta
-            )
-
+            menu_csv(ruta)
         elif opcion == "4":
-
-            print(
-                "Saliendo..."
-            )
-
+            print("Saliendo...")
             break
-
         else:
-
-            print(
-                "Opcion invalida"
-            )
-
-
+            print("Opcion invalida")
 menu_principal()
