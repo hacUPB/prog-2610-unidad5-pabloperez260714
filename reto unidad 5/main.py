@@ -16,7 +16,7 @@ def menu_principal():
     while True:
 
         print(
-            "\n===== MENU PRINCIPAL ====="
+            "\n menu principal"
         )
 
         print(
@@ -24,7 +24,7 @@ def menu_principal():
         )
 
         print(
-            "2. Procesar textos (.txt)"
+            "2. Procesar textos"
         )
 
         print(
